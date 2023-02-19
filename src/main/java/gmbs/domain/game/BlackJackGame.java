@@ -12,7 +12,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class BlackJackGame {
 
@@ -88,33 +87,12 @@ public class BlackJackGame {
     public Map<Name, Results> getAllResults() {
         Map<Name, Results> playerNameAndGameResults = new LinkedHashMap<>();
 
-        Results dealerResults = getDealerResults();
-        Map<Name, Results> gamerResults = getGamerResults();
+        Results dealerResults = dealer.getDealerResults(gamers.getValues());
+        Map<Name, Results> gamerResults = gamers.getGamerResults(dealer);
 
         playerNameAndGameResults.put(dealer.getName(), dealerResults);
         playerNameAndGameResults.putAll(gamerResults);
 
         return playerNameAndGameResults;
-    }
-
-    private Results getDealerResults() {
-        return Results.from(getGamers()
-                .map(gamer -> dealer.getPlayerResult(gamer.getCardState()))
-                .collect(Collectors.toUnmodifiableList()));
-    }
-
-    private Map<Name, Results> getGamerResults() {
-        return getGamers()
-                .collect(Collectors.toUnmodifiableMap(
-                        Gamer::getName,
-                        gamer -> Results.from(List.of(
-                                gamer.getPlayerResult(dealer.getCardState())
-                        ))
-                ));
-    }
-
-    private Stream<Gamer> getGamers() {
-        return gamers.getValues()
-                .stream();
     }
 }
