@@ -2,11 +2,14 @@ package gmbs.domain.player;
 
 import gmbs.domain.card.CardHand;
 import gmbs.domain.card.vo.Card;
+import gmbs.domain.game.result.Result;
+import gmbs.domain.game.result.Results;
 import gmbs.domain.player.name.vo.Name;
 import gmbs.domain.state.CardState;
 import gmbs.domain.state.State;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public final class Dealer extends BlackJackPlayer {
 
@@ -38,5 +41,12 @@ public final class Dealer extends BlackJackPlayer {
         List<String> cardHandNames = cardState.getCardHandNames();
         cardHandNames.remove(NEED_TO_DELETE_INDEX);
         return cardHandNames;
+    }
+
+    public Results getDealerResults(List<Gamer> gamers) {
+        List<Result> dealerResults = gamers.stream()
+                .map(gamer -> this.getPlayerResult(gamer.cardState))
+                .collect(Collectors.toUnmodifiableList());
+        return Results.from(dealerResults);
     }
 }
