@@ -2,6 +2,8 @@ package gmbs.domain.player;
 
 import gmbs.domain.card.vo.Card;
 import gmbs.domain.card.vo.TotalScore;
+import gmbs.domain.game.result.Results;
+import gmbs.domain.player.name.vo.Name;
 import gmbs.domain.state.CardState;
 import gmbs.domain.state.Essential;
 import gmbs.domain.state.finish.BlackJack;
@@ -81,6 +83,33 @@ class DealerTest {
 
         // then
         assertThat(showCardHandNames).hasSize(1);
+    }
+
+    @DisplayName("게이머들을 받아 딜러와 비교를 통해 딜러의 승,무,패 결과를 가져온다")
+    @ParameterizedTest
+    @MethodSource("provideGamersAndExpectResults")
+    void getDealerResults(List<Gamer> gamers, List<String> expectResults) {
+        // given
+        Dealer dealer = Dealer.from(CARDS_OVER_THAN_DEALER_LIMIT);
+
+        // when
+        Results dealerResults = dealer.getDealerResults(gamers);
+
+        // then
+        List<String> actualResults = dealerResults.getValues();
+        assertThat(actualResults).isEqualTo(expectResults);
+    }
+
+    private static Stream<Arguments> provideGamersAndExpectResults() {
+        return Stream.of(
+                Arguments.of(
+                        List.of(
+                                Gamer.of(Name.from("게이머1"), CARDS_LESS_THAN_DEALER_LIMIT),
+                                Gamer.of(Name.from("게이머2"), CARDS_OVER_THAN_DEALER_LIMIT),
+                                Gamer.of(Name.from("게이머3"), CARDS_BLACK_JACK)),
+                        List.of("승", "무", "패")
+                )
+        );
     }
 
     @DisplayName("초기 카드가 16이하이면 canDraw 가 true, 16 초과이면 false, 21이면 false 를 반환한다")
