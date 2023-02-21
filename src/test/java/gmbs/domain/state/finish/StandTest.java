@@ -24,7 +24,7 @@ class StandTest {
     @DisplayName("Stand 상태와 비교해 BlackJack 이면 LOSE, Bust 이면 WIN 을 반환한다")
     @ParameterizedTest
     @MethodSource("provideAllCardStates")
-    void pTest(CardState compareCardState) {
+    void getCompareResult(CardState compareCardState) {
         // given
         Finish standStatus = Stand.from(CardHand.from(BLACK_JACK_INIT_CARDS));
 

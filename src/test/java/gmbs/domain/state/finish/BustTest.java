@@ -22,7 +22,7 @@ class BustTest {
     @DisplayName("Bust 상태와 비교해 Bust 이면 DRAW, Bust 가 아니면 LOSE 를 반환한다")
     @ParameterizedTest
     @MethodSource("provideAllCardStates")
-    void pTest(Finish compareCardState) {
+    void getCompareResult(Finish compareCardState) {
         // given
         Finish bustStatus = Bust.from(CardHand.from(DUMMY_INIT_CARDS));
 
