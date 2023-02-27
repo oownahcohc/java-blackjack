@@ -2,7 +2,6 @@ package gmbs.domain.state;
 
 import gmbs.domain.card.CardHand;
 import gmbs.domain.card.vo.TotalScore;
-import gmbs.domain.state.finish.Bust;
 import gmbs.domain.state.finish.Finish;
 import gmbs.domain.state.finish.Stand;
 
@@ -14,11 +13,6 @@ public abstract class CardState implements State {
 
     protected CardState(final CardHand cardHand) {
         this.cardHand = cardHand;
-    }
-
-    @Override
-    public boolean isBust() {
-        return isSameCardStateWith(Bust.class);
     }
 
     @Override

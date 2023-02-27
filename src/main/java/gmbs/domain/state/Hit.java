@@ -23,6 +23,11 @@ public final class Hit extends CardState {
     }
 
     @Override
+    public boolean isBust() {
+        return false;
+    }
+
+    @Override
     public CardState draw(Card card) {
         CardHand addCardHand = cardHand.add(card);
         TotalScore totalScoreAfterDraw = addCardHand.calculateTotalScore();

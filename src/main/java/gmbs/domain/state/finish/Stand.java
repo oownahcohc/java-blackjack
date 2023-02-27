@@ -15,6 +15,11 @@ public final class Stand extends Finish {
     }
 
     @Override
+    public boolean isBust() {
+        return false;
+    }
+
+    @Override
     public Result getCompareResult(CardState anotherCardState) {
         if (anotherCardState.isSameCardStateWith(Bust.class)) {
             return Result.WIN;

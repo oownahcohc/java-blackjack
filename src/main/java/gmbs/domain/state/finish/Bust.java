@@ -15,6 +15,11 @@ public final class Bust extends Finish {
     }
 
     @Override
+    public boolean isBust() {
+        return true;
+    }
+
+    @Override
     public Result getCompareResult(CardState compareCardState) {
         if (compareCardState.isBust()) {
             return Result.DRAW;

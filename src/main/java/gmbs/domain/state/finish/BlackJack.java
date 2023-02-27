@@ -15,6 +15,11 @@ public final class BlackJack extends Finish {
     }
 
     @Override
+    public boolean isBust() {
+        return false;
+    }
+
+    @Override
     public Result getCompareResult(CardState compareCardState) {
         if (compareCardState.isSameCardStateWith(BlackJack.class)) {
             return Result.DRAW;

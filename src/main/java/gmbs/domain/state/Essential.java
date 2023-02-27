@@ -25,6 +25,11 @@ public final class Essential extends CardState {
     }
 
     @Override
+    public boolean isBust() {
+        return false;
+    }
+
+    @Override
     public Finish draw(Card card) {
         CardHand addCardHand = cardHand.add(card);
         TotalScore totalScoreAfterDraw = addCardHand.calculateTotalScore();
