@@ -39,7 +39,7 @@ class DealerTest {
         CardState actual = dealer.cardState;
 
         // then
-        assertThat(actual.getClass()).isEqualTo(expect);
+        assertThat(actual.isSameCardStateWith(expect)).isTrue();
     }
 
     private static Stream<Arguments> provideDealerInitCardsAndExpectCardState() {
