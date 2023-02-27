@@ -49,7 +49,7 @@ public class BlackJackGame {
         return gamers.drawCurrentPlayer(cardDeck.drawOne());
     }
 
-    public Gamer getNextTurnGamer() {
+    public Gamer passTurnToNextTurnGamer() {
         Gamer currentTurnGamer = getCurrentTurnGamer();
         gamers.passTurnToNextPlayer();
         return currentTurnGamer;
@@ -63,7 +63,7 @@ public class BlackJackGame {
         dealer = dealer.drawCard(cardDeck.drawOne());
     }
 
-    public void dealerStand() {
+    public void finishDealerTurn() {
         if (!dealer.isBust()) {
             dealer = dealer.stand();
         }

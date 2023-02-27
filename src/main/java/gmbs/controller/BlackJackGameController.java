@@ -44,7 +44,7 @@ public class BlackJackGameController {
         if (drawStatus.isYes()) {
             return blackJackGame.keepTurnAndDraw();
         }
-        return blackJackGame.getNextTurnGamer();
+        return blackJackGame.passTurnToNextTurnGamer();
     }
 
     private void startDealerTurn(BlackJackGame blackJackGame) {
@@ -52,6 +52,6 @@ public class BlackJackGameController {
             blackJackGame.dealerDraw();
             outputConsole.printDealerInfo();
         }
-        blackJackGame.dealerStand();
+        blackJackGame.finishDealerTurn();
     }
 }
