@@ -26,15 +26,15 @@ class CardHandTest {
 
     @DisplayName("초기 카드의 개수가 두장이 아니라면 예외가 발생한다")
     @ParameterizedTest
-    @MethodSource("provideNotSizeTwoCards")
+    @MethodSource("provideInvalidSizeTwoCards")
     void fail_createCardHandSizeIsNotTwo(List<Card> wrongInitCards) {
         // when, then
-        assertThatThrownBy(() -> CardHand.from(wrongInitCards))
+        assertThatThrownBy(() -> CardHand.initFrom(wrongInitCards))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 초기 패는 반드시 두장이어야 합니다");
     }
 
-    private static Stream<Arguments> provideNotSizeTwoCards() {
+    private static Stream<Arguments> provideInvalidSizeTwoCards() {
         return Stream.of(
                 Arguments.of(List.of(FIRST_INIT_CARD)),
                 Arguments.of(List.of(FIRST_INIT_CARD, Card.of(TWO, CLOVER), Card.of(THREE, HEART)))
@@ -46,7 +46,7 @@ class CardHandTest {
     @MethodSource("provideInitCardsAndExpectTotalScore")
     void calculateTotalScore(List<Card> initCards, TotalScore expect) {
         // given
-        CardHand cardHand = CardHand.from(initCards);
+        CardHand cardHand = CardHand.initFrom(initCards);
 
         // when
         TotalScore actual = cardHand.calculateTotalScore();
@@ -77,7 +77,7 @@ class CardHandTest {
     void add() {
         // given
         List<Card> initCards = List.of(FIRST_INIT_CARD, SECOND_INIT_CARD);
-        CardHand cardHand = CardHand.from(initCards);
+        CardHand cardHand = CardHand.initFrom(initCards);
 
         // when
         CardHand addCardHand = cardHand.add(ADDITIONAL_CARD);
@@ -85,7 +85,7 @@ class CardHandTest {
         // then
         assertAll(
                 () -> assertThat(addCardHand.getValues()).hasSize(3),
-                () -> assertEquals(addCardHand, cardHand)
+                () -> assertThat(addCardHand).isEqualTo(cardHand)
         );
     }
 
@@ -94,8 +94,8 @@ class CardHandTest {
     @MethodSource("provideStandardCardsAndAnotherCardsAndExpectResult")
     void getCompareResult(List<Card> standardCards, List<Card> anotherCards, Result expect) {
         // given
-        CardHand cardHand = CardHand.from(standardCards);
-        CardHand another = CardHand.from(anotherCards);
+        CardHand cardHand = CardHand.initFrom(standardCards);
+        CardHand another = CardHand.initFrom(anotherCards);
 
         // when
         Result actual = cardHand.getCompareResult(another);

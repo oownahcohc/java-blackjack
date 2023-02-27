@@ -18,7 +18,7 @@ public class CardHand {
         this.values = values;
     }
 
-    public static CardHand from(final List<Card> initCards) {
+    public static CardHand initFrom(final List<Card> initCards) {
         validateInitCardsSize(initCards);
         return new CardHand(new ArrayList<>(initCards));
     }
