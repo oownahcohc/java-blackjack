@@ -21,7 +21,7 @@ public final class Dealer extends BlackJackPlayer {
     }
 
     public static Dealer from(final List<Card> initCards) {
-        return new Dealer(DEALER_NAME, State.createForDealer(CardHand.from(initCards)));
+        return new Dealer(DEALER_NAME, State.createForDealer(CardHand.initFrom(initCards)));
     }
 
     @Override
@@ -39,8 +39,12 @@ public final class Dealer extends BlackJackPlayer {
     @Override
     public List<String> showCardHandNameValues() {
         List<String> cardHandNames = cardState.getCardHandNames();
-        cardHandNames.remove(NEED_TO_DELETE_INDEX);
+        hideOneCard(cardHandNames);
         return cardHandNames;
+    }
+
+    private void hideOneCard(final List<String> cardHandNames) {
+        cardHandNames.remove(NEED_TO_DELETE_INDEX);
     }
 
     public Results getDealerResults(List<Gamer> gamers) {
