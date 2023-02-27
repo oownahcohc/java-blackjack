@@ -34,9 +34,9 @@ class HitTest {
 
     private static Stream<Arguments> provideDrawCardAndExpectCardState() {
         return Stream.of(
-                Arguments.of(Hit.from(CardHand.from(INIT_CARDS)), Card.of(JACK, SPADE), Bust.class),
-                Arguments.of(Hit.from(CardHand.from(INIT_CARDS)), Card.of(TWO, SPADE), BlackJack.class),
-                Arguments.of(Hit.from(CardHand.from(INIT_CARDS)), Card.of(ACE, SPADE), Hit.class)
+                Arguments.of(Hit.from(CardHand.initFrom(INIT_CARDS)), Card.of(JACK, SPADE), Bust.class),
+                Arguments.of(Hit.from(CardHand.initFrom(INIT_CARDS)), Card.of(TWO, SPADE), BlackJack.class),
+                Arguments.of(Hit.from(CardHand.initFrom(INIT_CARDS)), Card.of(ACE, SPADE), Hit.class)
         );
     }
 
@@ -44,8 +44,8 @@ class HitTest {
     @Test
     void getResult() {
         // given
-        CardState hitState = Hit.from(CardHand.from(INIT_CARDS));
-        CardState compareState = Hit.from(CardHand.from(INIT_CARDS));
+        CardState hitState = Hit.from(CardHand.initFrom(INIT_CARDS));
+        CardState compareState = Hit.from(CardHand.initFrom(INIT_CARDS));
 
         // when, then
         assertThatThrownBy(() -> hitState.getResult(compareState))

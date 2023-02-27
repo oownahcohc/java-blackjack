@@ -24,7 +24,7 @@ class BustTest {
     @MethodSource("provideAllCardStates")
     void getCompareResult(Finish compareCardState) {
         // given
-        Finish bustStatus = Bust.from(CardHand.from(DUMMY_INIT_CARDS));
+        Finish bustStatus = Bust.from(CardHand.initFrom(DUMMY_INIT_CARDS));
 
         // when
         Result result = bustStatus.getCompareResult(compareCardState);
@@ -39,9 +39,9 @@ class BustTest {
 
     private static Stream<Arguments> provideAllCardStates() {
         return Stream.of(
-                Arguments.of(Bust.from(CardHand.from(DUMMY_INIT_CARDS))),
-                Arguments.of(BlackJack.from(CardHand.from(DUMMY_INIT_CARDS))),
-                Arguments.of(Stand.from(CardHand.from(DUMMY_INIT_CARDS)))
+                Arguments.of(Bust.from(CardHand.initFrom(DUMMY_INIT_CARDS))),
+                Arguments.of(BlackJack.from(CardHand.initFrom(DUMMY_INIT_CARDS))),
+                Arguments.of(Stand.from(CardHand.initFrom(DUMMY_INIT_CARDS)))
         );
     }
 }

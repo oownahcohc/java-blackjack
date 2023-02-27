@@ -26,7 +26,7 @@ class BlackJackTest {
     @MethodSource("provideAllCardStates")
     void getCompareResult(CardState compareCardState) {
         // given
-        Finish blackJackStatus = BlackJack.from(CardHand.from(BLACK_JACK_INIT_CARDS));
+        Finish blackJackStatus = BlackJack.from(CardHand.initFrom(BLACK_JACK_INIT_CARDS));
 
         // when
         Result result = blackJackStatus.getCompareResult(compareCardState);
@@ -41,9 +41,9 @@ class BlackJackTest {
 
     private static Stream<Arguments> provideAllCardStates() {
         return Stream.of(
-                Arguments.of(BlackJack.from(CardHand.from(DUMMY_INIT_CARDS))),
-                Arguments.of(Stand.from(CardHand.from(DUMMY_INIT_CARDS))),
-                Arguments.of(Bust.from(CardHand.from(DUMMY_INIT_CARDS)))
+                Arguments.of(BlackJack.from(CardHand.initFrom(DUMMY_INIT_CARDS))),
+                Arguments.of(Stand.from(CardHand.initFrom(DUMMY_INIT_CARDS))),
+                Arguments.of(Bust.from(CardHand.initFrom(DUMMY_INIT_CARDS)))
         );
     }
 }

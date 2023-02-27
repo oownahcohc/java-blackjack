@@ -37,9 +37,9 @@ class EssentialTest {
 
     private static Stream<Arguments> provideDrawCardAndExpectCardState() {
         return Stream.of(
-                Arguments.of(Essential.from(CardHand.from(INIT_CARDS)), Card.of(JACK, SPADE), Bust.class),
-                Arguments.of(Essential.from(CardHand.from(INIT_CARDS)), Card.of(FIVE, SPADE), BlackJack.class),
-                Arguments.of(Essential.from(CardHand.from(INIT_CARDS)), Card.of(ACE, SPADE), Stand.class)
+                Arguments.of(Essential.from(CardHand.initFrom(INIT_CARDS)), Card.of(JACK, SPADE), Bust.class),
+                Arguments.of(Essential.from(CardHand.initFrom(INIT_CARDS)), Card.of(FIVE, SPADE), BlackJack.class),
+                Arguments.of(Essential.from(CardHand.initFrom(INIT_CARDS)), Card.of(ACE, SPADE), Stand.class)
         );
     }
 
@@ -47,8 +47,8 @@ class EssentialTest {
     @Test
     void getResult() {
         // given
-        CardState essentialState = Essential.from(CardHand.from(INIT_CARDS));
-        CardState compareState = Essential.from(CardHand.from(INIT_CARDS));
+        CardState essentialState = Essential.from(CardHand.initFrom(INIT_CARDS));
+        CardState compareState = Essential.from(CardHand.initFrom(INIT_CARDS));
 
         // when, then
         assertThatThrownBy(() -> essentialState.getResult(compareState))

@@ -35,13 +35,13 @@ class FinishTest {
     private static Stream<Arguments> provideFinishCardStateAndDrawCard() {
         return Stream.of(
                 Arguments.of(
-                        State.createForDealer(CardHand.from(BLACK_JACK_INIT_CARDS)),
+                        State.createForDealer(CardHand.initFrom(BLACK_JACK_INIT_CARDS)),
                         Card.of(ACE, SPADE)),
                 Arguments.of(
-                        State.createForDealer(CardHand.from(DEALER_STAND_INIT_CARDS)),
+                        State.createForDealer(CardHand.initFrom(DEALER_STAND_INIT_CARDS)),
                         Card.of(ACE, SPADE)),
                 Arguments.of(
-                        State.createForGamer(CardHand.from(GAMER_INIT_CARDS)).draw(Card.of(TWO, SPADE)),
+                        State.createForGamer(CardHand.initFrom(GAMER_INIT_CARDS)).draw(Card.of(TWO, SPADE)),
                         Card.of(ACE, SPADE))
         );
     }

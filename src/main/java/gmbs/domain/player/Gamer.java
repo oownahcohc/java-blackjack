@@ -16,7 +16,7 @@ public final class Gamer extends BlackJackPlayer {
     }
 
     public static Gamer of(final Name name, final List<Card> initCards) {
-        return new Gamer(name, State.createForGamer(CardHand.from(initCards)));
+        return new Gamer(name, State.createForGamer(CardHand.initFrom(initCards)));
     }
 
     @Override

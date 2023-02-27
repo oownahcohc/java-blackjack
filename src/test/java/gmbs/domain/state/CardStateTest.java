@@ -26,11 +26,11 @@ class CardStateTest {
     @Test
     void createFor() {
         // given, when
-        CardState dealerBlackJackState = State.createForDealer(CardHand.from(BLACK_JACK_CARDS));
-        CardState dealerEssentialState = State.createForDealer(CardHand.from(ESSENTIAL_CARDS));
-        CardState dealerStandState = State.createForDealer(CardHand.from(STAND_CARDS));
-        CardState gamerBlackJackState = State.createForGamer(CardHand.from(BLACK_JACK_CARDS));
-        CardState gamerHitState = State.createForGamer(CardHand.from(HIT_CARDS));
+        CardState dealerBlackJackState = State.createForDealer(CardHand.initFrom(BLACK_JACK_CARDS));
+        CardState dealerEssentialState = State.createForDealer(CardHand.initFrom(ESSENTIAL_CARDS));
+        CardState dealerStandState = State.createForDealer(CardHand.initFrom(STAND_CARDS));
+        CardState gamerBlackJackState = State.createForGamer(CardHand.initFrom(BLACK_JACK_CARDS));
+        CardState gamerHitState = State.createForGamer(CardHand.initFrom(HIT_CARDS));
 
         // then
         assertAll(
@@ -46,9 +46,9 @@ class CardStateTest {
     @Test
     void isBust() {
         // given
-        CardState hitState = State.createForGamer(CardHand.from(HIT_CARDS));
-        CardState essentialState = State.createForDealer(CardHand.from(ESSENTIAL_CARDS));
-        CardState bustState = State.createForGamer(CardHand.from(HIT_CARDS)).draw(Card.of(THREE, SPADE));
+        CardState hitState = State.createForGamer(CardHand.initFrom(HIT_CARDS));
+        CardState essentialState = State.createForDealer(CardHand.initFrom(ESSENTIAL_CARDS));
+        CardState bustState = State.createForGamer(CardHand.initFrom(HIT_CARDS)).draw(Card.of(THREE, SPADE));
 
         // when
         boolean isHitStateBust = hitState.isBust();
@@ -67,8 +67,8 @@ class CardStateTest {
     @Test
     void stand() {
         // given
-        CardState gamerState = State.createForGamer(CardHand.from(HIT_CARDS));
-        CardState dealerState = State.createForDealer(CardHand.from(ESSENTIAL_CARDS));
+        CardState gamerState = State.createForGamer(CardHand.initFrom(HIT_CARDS));
+        CardState dealerState = State.createForDealer(CardHand.initFrom(ESSENTIAL_CARDS));
 
         // when
         Finish gamerStand = gamerState.stand();
