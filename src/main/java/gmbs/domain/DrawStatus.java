@@ -10,11 +10,11 @@ public enum DrawStatus {
 
     private final String value;
 
-    DrawStatus(final String value) {
+    DrawStatus(String value) {
         this.value = value;
     }
 
-    public static DrawStatus from(final String input) {
+    public static DrawStatus from(String input) {
         if (input.isBlank()) {
             throw new IllegalArgumentException("[ERROR] 입력값은 공백일 수 없습니다");
         }
