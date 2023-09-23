@@ -1,10 +1,10 @@
 package gmbs.view.output;
 
-import gmbs.domain.card.vo.TotalScore;
-import gmbs.domain.game.result.Results;
-import gmbs.domain.player.Gamer;
-import gmbs.domain.player.Player;
-import gmbs.domain.player.name.vo.Name;
+import gmbs.domain.card.state.vo.TotalScore;
+import gmbs.domain.game.vo.Profit;
+import gmbs.domain.participants.Participants;
+import gmbs.domain.participants.Player;
+import gmbs.domain.participants.vo.Name;
 
 import java.util.List;
 import java.util.Map;
@@ -14,7 +14,7 @@ public class OutputConsoleImpl implements OutputConsole {
     private static final String CARD_SYMBOL = "카드 : ";
     private static final String RESULT_SYMBOL = " - 결과 : ";
     private static final String LINE_BREAK = "\n";
-    private static final String FINAL_RESULT = "### 최종 승패 ###";
+    private static final String FINAL_PROFIT = "### 최종 수익 ###";
 
     @Override
     public void printInputGamerNames() {
@@ -22,26 +22,31 @@ public class OutputConsoleImpl implements OutputConsole {
     }
 
     @Override
-    public void printPlayerInitInfo(List<Player> allPlayer) {
+    public void printInputBettingAmount(Player player) {
+        System.out.printf("%s의 배팅 금액을 입력하세요", player.notifyName().getValue());
+    }
+
+    @Override
+    public void printPlayerInitInfo(List<Participants> allParticipants) {
         StringBuilder stringBuilder = new StringBuilder();
-        allPlayer.forEach(player ->
-                stringBuilder.append(player.getNameValue())
+        allParticipants.forEach(participants ->
+                stringBuilder.append(participants.notifyName().getValue())
                         .append(": ")
-                        .append(player.showCardHandNameValues())
+                        .append(participants.showCardHandNameValues())
                         .append(LINE_BREAK));
         System.out.println(stringBuilder);
     }
 
     @Override
-    public void printQuestionForDraw(Gamer gamer) {
-        System.out.printf("%s는 한장의 카드를 더 받겠습니까?(예는 y, 아니오는 n)%n", gamer.getNameValue());
+    public void printQuestionForDraw(Player player) {
+        System.out.printf("%s는 한장의 카드를 더 받겠습니까?(예는 y, 아니오는 n)%n", player.notifyName().getValue());
     }
 
     @Override
-    public void printPlayerInfo(Player player) {
-        String stringBuilder = player.getNameValue() +
+    public void printPlayerInfo(Participants participants) {
+        String stringBuilder = participants.notifyName().getValue() +
                 CARD_SYMBOL +
-                player.showCardHandNameValues() +
+                participants.showCardHandNameValues() +
                 LINE_BREAK;
         System.out.println(stringBuilder);
     }
@@ -52,12 +57,12 @@ public class OutputConsoleImpl implements OutputConsole {
     }
 
     @Override
-    public void printPlayerInfoAndTotalScore(Map<Player, TotalScore> playerAndTotalScore) {
+    public void printPlayerInfoAndTotalScore(Map<Participants, TotalScore> participantAndTotalScore) {
         StringBuilder stringBuilder = new StringBuilder();
-        playerAndTotalScore.forEach((player, totalScore) ->
-                stringBuilder.append(player.getNameValue())
+        participantAndTotalScore.forEach((participants, totalScore) ->
+                stringBuilder.append(participants.notifyName().getValue())
                         .append(CARD_SYMBOL)
-                        .append(player.showCardHandNameValues())
+                        .append(participants.showCardHandNameValues())
                         .append(RESULT_SYMBOL)
                         .append(totalScore.getValue())
                         .append(LINE_BREAK)
@@ -66,14 +71,14 @@ public class OutputConsoleImpl implements OutputConsole {
     }
 
     @Override
-    public void printGameResults(Map<Name, Results> playerNameAndResults) {
+    public void printGameResults(Map<Name, Profit> playerNameAndProfits) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(FINAL_RESULT);
-        playerNameAndResults.forEach((playerName, results) ->
+        stringBuilder.append(FINAL_PROFIT);
+        playerNameAndProfits.forEach((playerName, profit) ->
                 stringBuilder.append(LINE_BREAK)
                         .append(playerName.getValue())
                         .append(": ")
-                        .append(results.getValues())
+                        .append(profit.getValue())
         );
         System.out.println(stringBuilder);
     }

@@ -13,6 +13,11 @@ public class InputConsoleImpl implements InputConsole {
     }
 
     @Override
+    public String readBettingAmount() {
+        return SCANNER.nextLine();
+    }
+
+    @Override
     public String readPossibilityOfDraw() {
         return SCANNER.nextLine();
     }

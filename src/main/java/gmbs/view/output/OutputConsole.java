@@ -1,10 +1,10 @@
 package gmbs.view.output;
 
-import gmbs.domain.card.vo.TotalScore;
-import gmbs.domain.game.result.Results;
-import gmbs.domain.player.Gamer;
-import gmbs.domain.player.Player;
-import gmbs.domain.player.name.vo.Name;
+import gmbs.domain.card.state.vo.TotalScore;
+import gmbs.domain.game.vo.Profit;
+import gmbs.domain.participants.Participants;
+import gmbs.domain.participants.Player;
+import gmbs.domain.participants.vo.Name;
 
 import java.util.List;
 import java.util.Map;
@@ -13,15 +13,17 @@ public interface OutputConsole {
 
     void printInputGamerNames();
 
-    void printPlayerInitInfo(List<Player> allPlayer);
+    void printInputBettingAmount(Player player);
 
-    void printQuestionForDraw(Gamer gamer);
+    void printPlayerInitInfo(List<Participants> allParticipants);
 
-    void printPlayerInfo(Player player);
+    void printQuestionForDraw(Player player);
+
+    void printPlayerInfo(Participants player);
 
     void printDealerInfo();
 
-    void printPlayerInfoAndTotalScore(Map<Player, TotalScore> playerAndTotalScore);
+    void printPlayerInfoAndTotalScore(Map<Participants, TotalScore> playerAndTotalScore);
 
-    void printGameResults(Map<Name, Results> playerNameAndResults);
+    void printGameResults(Map<Name, Profit> playerNameAndProfits);
 }
